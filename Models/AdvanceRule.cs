@@ -1,0 +1,7 @@
+namespace board_game_api.Models
+{
+    public class AdvanceRule : MotionRule
+    {
+        
+    }
+}
