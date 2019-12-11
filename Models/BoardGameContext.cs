@@ -4,8 +4,9 @@ namespace board_game_api.Models
 {
     public class BoardGameContext: DbContext
     {
+
+        public BoardGameContext(DbContextOptions<BoardGameContext> options): base(options) {}
         public DbSet<BoardGame> BoardGame { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=boardgame.db");
+        public DbSet<Player> Player { get; set; }
     }
 }
