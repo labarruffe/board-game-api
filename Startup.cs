@@ -27,6 +27,13 @@ namespace board_game_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder => 
+            {
+                builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+            }));
+
             services.AddDbContext<BoardGameContext>(opt => 
                 opt.UseSqlite("Data Source=boardgame.db")
             );    
@@ -48,7 +55,7 @@ namespace board_game_api
             {
                 app.UseHsts();
             }
-
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
