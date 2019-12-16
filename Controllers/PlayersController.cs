@@ -60,7 +60,7 @@ namespace board_game_api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(player).State = EntityState.Modified;
+            _context.Update(player);
 
             try
             {

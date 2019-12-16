@@ -93,7 +93,7 @@ namespace board_game_api.Controllers
             _context.Rules.Add(rule);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRule", new { id = rule.Id }, rule);
+            return Created("", rule);
         }
 
         // DELETE: api/Rules/5
