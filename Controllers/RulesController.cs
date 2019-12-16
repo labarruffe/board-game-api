@@ -11,56 +11,56 @@ namespace board_game_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlayersController : ControllerBase
+    public class RulesController : ControllerBase
     {
         private readonly BoardGameContext _context;
 
-        public PlayersController(BoardGameContext context)
+        public RulesController(BoardGameContext context)
         {
             _context = context;
         }
 
-        // GET: api/Players
+        // GET: api/Rules
         [HttpGet]
-        public IEnumerable<Player> GetPlayers()
+        public IEnumerable<Rule> GetRules()
         {
-            return _context.Players;
+            return _context.Rules;
         }
 
-        // GET: api/Players/5
+        // GET: api/Rules/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPlayer([FromRoute] int id)
+        public async Task<IActionResult> GetRule([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var player = await _context.Players.FindAsync(id);
+            var rule = await _context.Rules.FindAsync(id);
 
-            if (player == null)
+            if (rule == null)
             {
                 return NotFound();
             }
 
-            return Ok(player);
+            return Ok(rule);
         }
 
-        // PUT: api/Players/5
+        // PUT: api/Rules/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlayer([FromRoute] int id, [FromBody] Player player)
+        public async Task<IActionResult> PutRule([FromRoute] int id, [FromBody] Rule rule)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != player.Id)
+            if (id != rule.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(player).State = EntityState.Modified;
+            _context.Entry(rule).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace board_game_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PlayerExists(id))
+                if (!RuleExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace board_game_api.Controllers
             return NoContent();
         }
 
-        // POST: api/Players
+        // POST: api/Rules
         [HttpPost]
-        public async Task<IActionResult> PostPlayer([FromBody] Player player)
+        public async Task<IActionResult> PostRule([FromBody] Rule rule)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Players.Add(player);
+            _context.Rules.Add(rule);
             await _context.SaveChangesAsync();
 
-            return Created("", player);
+            return CreatedAtAction("GetRule", new { id = rule.Id }, rule);
         }
 
-        // DELETE: api/Players/5
+        // DELETE: api/Rules/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePlayer([FromRoute] int id)
+        public async Task<IActionResult> DeleteRule([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var player = await _context.Players.FindAsync(id);
-            if (player == null)
+            var rule = await _context.Rules.FindAsync(id);
+            if (rule == null)
             {
                 return NotFound();
             }
 
-            _context.Players.Remove(player);
+            _context.Rules.Remove(rule);
             await _context.SaveChangesAsync();
 
-            return Ok(player);
+            return Ok(rule);
         }
 
-        private bool PlayerExists(int id)
+        private bool RuleExists(int id)
         {
-            return _context.Players.Any(e => e.Id == id);
+            return _context.Rules.Any(e => e.Id == id);
         }
     }
 }
