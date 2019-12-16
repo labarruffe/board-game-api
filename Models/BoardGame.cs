@@ -5,12 +5,12 @@ namespace board_game_api.Models
 {
     public class BoardGame
     {
-        public int BoardGameId { get; set; }
-        public List<Square> Squares { get; } = new List<Square>();
-        public List<Log> Logs { get; } = new List<Log>();
-        public List<Round> Rounds { get; } = new List<Round>();
-        public Dice Dice { get; set; }
-        public List<Player> Participants { get; } = new List<Player>();
+        public int Id { get; set; }
+        // public ICollection<Log> Logs { get; set; } = new List<Log>();
+        public int Round { get; set; }
+        public int DiceSize { get; set; }
+        public List<Player> Participants { get; set; }
+        public List<Square> Squares { get; set; }
 
         // public BoardGame(int diceSize) 
         // {

@@ -4,8 +4,8 @@ namespace board_game_api.Models
 {
     public class Ranking
     {
-        public int RankingId { get; set; }
-        public List<Player> Order { get; set; }
+        public int Id { get; set; }
+        public List<Player> Order { get; set; } = new List<Player>();
         public Player Winner { get; set; }
     }
 }
