@@ -28,8 +28,13 @@ namespace board_game_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BoardGameContext>(opt => 
-            opt.UseSqlite("Data Source=boardgame.db"));    
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                opt.UseSqlite("Data Source=boardgame.db")
+            );    
+            services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
